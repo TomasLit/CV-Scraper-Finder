@@ -1,3 +1,5 @@
+# CV Scraper Finder
+
 import os
 from unidecode import unidecode
 from create_html import create_html
