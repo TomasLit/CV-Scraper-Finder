@@ -1,0 +1,90 @@
+/* ===============================
+   Author: Tomas Kiveris
+   Date:   2023-03-22
+   =============================== */
+
+/* General */
+
+body {
+   background: #515150 url(https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) top left;
+   background-size: cover;
+   color: #4b2707;
+   font-size: 14px;
+   font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   -webkit-font-smoothing: antialiased;
+   text-rendering: optimizeLegibility;
+}
+
+.container {
+   width: 924px;
+   margin: 0 auto;
+   padding: 30px 24px;
+}
+
+/* Typography */
+
+h1 {
+   color: #f2cdad;
+   font-size: 60px;
+   font-weight: bold;
+   text-align: center;
+   text-shadow: 2px 2px #3c2f15;
+   padding: 0 0 20px;
+   /* background: url('../images/header-divider.png') bottom center no-repeat; */
+   font-family: 'Love Ya Like A Sister', cursive;
+   line-height: 44px;
+   margin: 20px;
+}
+
+a:link {
+   color: #845c36;
+}
+
+a:visited {
+   color: #a4ac72;
+}
+
+a:hover {
+   color: #4b2707;
+   font-weight: bold;
+}
+
+/* Header */
+
+header {
+   text-align: left;
+}
+
+header ul {
+   background: #ffffff;
+   border-radius: 20px;
+   opacity: 0.6;
+   margin: 0;
+   padding: 0;
+   list-style: none; /* nuima taškiukus nuo sąrašo */
+   display: block;
+   padding: 10px 5px;
+}
+
+header li {
+   padding: 0 0 10px;
+   padding: 0 20px;
+}
+
+header li a {
+   font-size: large;
+   text-decoration: none;
+   font-weight: normal;
+}
+
+/* Force Elements to Self Clear its Children: http://css-tricks.com/snippets/css/clear-fix/ */
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+	}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
