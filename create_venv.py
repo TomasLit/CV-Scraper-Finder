@@ -1,6 +1,6 @@
 import os
-import sys
 import subprocess
+import sys
 import venv
 
 
@@ -8,11 +8,14 @@ venv_name = "my_virtual_environment"
 
 
 def create_virtual_env():
-    if not os.path.exists(venv_name):
-        venv.create(venv_name, with_pip=True)
-        print(f"Virtual environment '{venv_name}' created.")
-    else:
-        pass    
+    try:
+        venv_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), venv_name))
+        venv.create(venv_dir, with_pip=True)
+        print("VENV created")
+        return venv_dir
+    except Exception as e:
+        print(f"Error creating virtual environment: {e}", file=sys.stderr)
+        return None
 
 
 def activate_venv():
@@ -39,13 +42,3 @@ def install_modules():
         print(f"Virtual environment '{venv_name}' created and activated.")
     else:
         pass
-
-
-def main():
-    if sys.version_info >= (3, 3):
-        create_virtual_env()
-        activate_venv()
-        install_modules()
-        print('It looks like everything is done, Sir!')
-main()
-

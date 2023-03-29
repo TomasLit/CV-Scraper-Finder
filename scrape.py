@@ -7,25 +7,20 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 
-def scrape_for_cv(url, url2, i):
-    site_url = url + url2
-    response = requests.get(url)
-    html_content = response.content
 
-    response = requests.get(site_url + str(i))
-    print("\n", site_url + str(i))
+def scrape_for_cv(url, url2, i):  
+    site_url = f"{url}{url2}{i}"
+    response = requests.get(site_url)
+    print("\n", site_url)
     if response.status_code == 200:
-        html_content = response.content
-        soup = BeautifulSoup(html_content, "html.parser")
+        soup = BeautifulSoup(response.content, "html.parser")
+        links = soup.find_all('a')
+        filtered_links = remove_duplicate_links(links)
+        return filtered_links
     else:
         print("Error accessing page ", i)
         pass
-
-    links = soup.find_all('a')
-
-    filtered_links = remove_duplicate_links(links)
-    return filtered_links
-
+ 
 
 def remove_duplicate_links(links):
     filtered_links = []
@@ -40,7 +35,6 @@ def scrape_dynamic_page(link):
     options.add_argument("headless")
     service = Service('/Users/${userName}/Drivers/chromedriver')
     browser = webdriver.Chrome(service=service, options=options)
-    
     browser.get(link)
     title = (
         WebDriverWait(driver=browser, timeout=10)
@@ -52,28 +46,45 @@ def scrape_dynamic_page(link):
     return content
 
 
-def find_all_offerings(links, url, word):
+def find_all_offerings(links, url, keyword1, keyword2, search_type, region):
     work_offerings = []
     for link in links:
         href = link.get('href')
-        if href and word in href.lower():
-            link = url + href
-            if link not in work_offerings:
-                print("\nRastas darbo skelbimas: ", link)
-                soup2 = BeautifulSoup(scrape_dynamic_page(link), "html.parser")
-                title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
-                work_offerings.append({title:(url + href)})
+        if search_type == "or":
+            if href and (keyword1 in href.lower() or keyword2 in href.lower()) and (region in href.lower()):
+                link = url + href
+                if link not in work_offerings:
+                    print("\nRastas darbo skelbimas: ", link)
+                    soup2 = BeautifulSoup(scrape_dynamic_page(link), "html.parser")
+                    title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
+                    work_offerings.append({title: link})
+        else:
+            if href and (keyword1 in href.lower() and keyword2 in href.lower()) and (region in href.lower()):
+                link = url + href
+                if link not in work_offerings:
+                    print("\nRastas darbo skelbimas: ", link)
+                    soup2 = BeautifulSoup(scrape_dynamic_page(link), "html.parser")
+                    title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
+                    work_offerings.append({title: link})
     return work_offerings
 
 
-def find_all_offerings_cvbankas(links, word):
+def find_all_offerings_cvbankas(links, keyword1, keyword2, search_type, region):
     work_offerings = []
     for link in links:
         href = link.get('href')
-        if href and word in href.lower():
-            print("\nRastas darbo skelbimas: ", href)
-            if href not in work_offerings:
-                soup2 = BeautifulSoup(scrape_dynamic_page(href), "html.parser")
-                title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
-                work_offerings.append({title: href})
+        if search_type == "or":
+            if href and (keyword1 in href.lower() or keyword2 in href.lower()) and (region in href.lower()):
+                if href not in work_offerings:
+                    print("\nRastas darbo skelbimas: ", href)
+                    soup2 = BeautifulSoup(scrape_dynamic_page(href), "html.parser")
+                    title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
+                    work_offerings.append({title: href})
+        else:
+            if href and (keyword1 in href.lower() and keyword2 in href.lower()) and (region in href.lower()):
+                if href not in work_offerings:
+                    print("\nRastas darbo skelbimas: ", href)
+                    soup2 = BeautifulSoup(scrape_dynamic_page(href), "html.parser")
+                    title = getattr(soup2.find('h1'), 'text', 'Pavadinimas nerastas')
+                    work_offerings.append({title: href})
     return work_offerings

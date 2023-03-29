@@ -53,12 +53,12 @@ a:hover {
 
 header {
    text-align: left;
-}
-
-header ul {
    background: #ffffff;
    border-radius: 20px;
    opacity: 0.6;
+}
+
+header ul {
    margin: 0;
    padding: 0;
    list-style: none; /* nuima taškiukus nuo sąrašo */
