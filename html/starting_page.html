@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/modernizr.js"></script>
+    <title>CV Scraper Finder</title>
+</head>
+<body>
+
+    <h1>CV Scraper Finder</h1>
+
+    <header class="container">
+        <form id="search-form">
+            <fieldset>
+
+                <legend>Ko ieškote?</legend>
+
+                <p>Galite ieškoti skelbimų su vienu arba dviem raktažodžiais.</p>
+
+                Raktažodis 1: <input type="text" name="keyword1" placeholder="Ko ieškote?"><br>
+                Raktažodis 2: <input type="text" name="keyword2" placeholder="Ko ieškote?"><br>
+                
+                <br>
+
+                <p>Jei pasirinksite "Arba"- skelbimo pavadinime turės būti bent vienas iš raktažodžių, jei- "Ir", turės būti abu.</p>
+
+                Raktažodžių paieška:<br>
+                <input type="radio" name="searchType" value="or">Arba<br> 
+                <input type="radio" name="searchType" value="and">Ir 
+
+                <br><br>
+
+                Kuriam regione ieškote darbo?<br>
+                <input type="radio" name="region" value="visa">Visa Lietuva<br> 
+                <input type="radio" name="region" value="vilnius">Vilnius<br>
+                <input type="radio" name="region" value="kaunas">Kaunas 
+
+                <br><br>
+
+                <input type="submit" value="Save my information">
+                <input type="reset" value="Clear form">
+
+            </fieldset>
+        </form>
+    </header>
+
+</body>
+</html>
